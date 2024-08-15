@@ -3,7 +3,15 @@
 import { formatDate } from "@/utils";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
-const Message = ({ message, time }: { message: string; time: string }) => {
+const Message = ({
+  message,
+  time,
+  question,
+}: {
+  message: string;
+  time: string;
+  question: string | undefined;
+}) => {
   return (
     <div className="p-4 ">
       <Link href={"/messages"}>
@@ -15,6 +23,7 @@ const Message = ({ message, time }: { message: string; time: string }) => {
 
       <div className="p-2 mt-6 rounded-md bg-primary/5">
         <p className="text-slate-500 text-[0.8rem]">{formatDate(time)}</p>
+        {question && <p className="pt-2 text-[1.1rem] text-slate-400">Q: {question}</p>}
         {/* <p className="text-slate-500 text-[0.8rem]">Message:</p> */}
         <p className="text-primary text-[1.2rem] mt-2 px-6">{message}</p>
       </div>

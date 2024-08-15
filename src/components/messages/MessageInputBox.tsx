@@ -1,9 +1,21 @@
 "use client";
 import { _ } from "@/utils";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-const MessageInputBox = ({ userId }: { userId: string }) => {
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+
+const MessageInputBox = ({
+  userId,
+  questionId,
+}: {
+  userId: string;
+  questionId?: any;
+}) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const [loading, setLoading] = useState<boolean>();
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
@@ -13,6 +25,7 @@ const MessageInputBox = ({ userId }: { userId: string }) => {
       const response = await _.post("/message", {
         username: userId,
         message,
+        questionId: questionId?.id,
       });
       if (response?.data?.status) {
         setSubmitted(true);
@@ -25,10 +38,21 @@ const MessageInputBox = ({ userId }: { userId: string }) => {
       setLoading(false);
     }
   }
+  const nextSearchParams = new URLSearchParams(searchParams.toString());
+
+  useEffect(() => {
+    if (!questionId) {
+      nextSearchParams.delete("q");
+      router.replace(`${pathname}?${nextSearchParams}`);
+    }
+  }, []);
   return (
     <div className="lg:max-w-[450px] mx-auto lg:pt-8">
       <div className="text-white px-3   py-4 rounded-t-lg bg-primary  ">
-        <p className="font-light"> Flow your mind</p>
+        <p className="font-light">
+          {" "}
+          {questionId ? questionId?.title : "flow your mind"}
+        </p>
       </div>
       <textarea
         value={message}
@@ -48,7 +72,7 @@ const MessageInputBox = ({ userId }: { userId: string }) => {
         onClick={sendMessage}
         className="hover:bg-primary/90 bg-primary text-white text-center w-full rounded-lg py-3 mt-5"
       >
-        {loading? 'sending...': 'send message'}
+        {loading ? "sending..." : "send message"}
       </button>
 
       {submitted && (

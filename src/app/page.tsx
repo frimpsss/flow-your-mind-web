@@ -9,18 +9,18 @@ export default function Home() {
   const router = useRouter();
   const [values, setValues] = useState<number[]>([0, -100]);
 
-  async function ping() {
-    await _.get("/");
-  }
-  useEffect(() => {
-    const i = setInterval(() => {
-      setValues((v) => {
-        return [v[1], v[0]];
-      });
-    }, 4500);
-    ping();
-    return () => clearInterval(i);
-  }, []);
+  // async function ping() {
+  //   await _.get("/ping");
+  // }
+  // useEffect(() => {
+  //   const i = setInterval(() => {
+  //     setValues((v) => {
+  //       return [v[1], v[0]];
+  //     });
+  //   }, 4500);
+  //   ping();
+  //   return () => clearInterval(i);
+  // }, []);
   return (
     <>
       <div className="text-primary relative">
