@@ -9,8 +9,8 @@ import toast from "react-hot-toast";
 const page = () => {
   const [custs, setCusts] = useState([]);
   const [message, setMessage] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>();
-  const [isFetching, setIsFetching] = useState<boolean>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
 
   async function getAllCustoms() {
     try {
