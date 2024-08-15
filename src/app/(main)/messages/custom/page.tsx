@@ -101,7 +101,7 @@ const Page = () => {
             </div>
           ) : (
             custs?.map((item: any, key) => (
-              <div>
+              <div key={key}>
                 <h4 className="text-slate-400 text-[1.1rem] font-normal mb-2">
                   Q- {item?.title}
                 </h4>
