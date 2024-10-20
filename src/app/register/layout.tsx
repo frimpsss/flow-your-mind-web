@@ -13,7 +13,7 @@ export default function RootLayout({
   return (
     <>
       <section
-        className="relative h-screen"
+        className="relative min-h-screen"
         style={{
           backgroundColor: "#ffffff",
           backgroundImage: "radial-gradient(#1b1871 0.6px, #ffffff 0.6px)",
@@ -22,7 +22,7 @@ export default function RootLayout({
       >
         {children}
       </section>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
