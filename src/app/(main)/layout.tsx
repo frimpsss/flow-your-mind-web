@@ -12,11 +12,11 @@ import { useCookies } from "react-cookie";
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [cookies] = useCookies(["user"]);
   const nav = useRouter();
-  useEffect(() => {
-    if (!cookies?.user?.token) {
-      return nav.push("/");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!cookies?.user?.token) {
+  //     return nav.push("/");
+  //   }
+  // }, []);
   return (
     <>
       <MainAppHeader />
